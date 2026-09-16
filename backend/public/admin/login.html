@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Login | Purdah-Sofa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#7a1f2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10.5 12 4l9 6.5"/>
+        <path d="M5 9.5V20h14V9.5"/>
+        <path d="M9 20v-6h6v6"/>
+      </svg>
+    </div>
+    <h1>Admin Login</h1>
+    <p class="sub">Sign in to manage bookings and messages for Purdah-Sofa.</p>
+
+    <div class="login-error" id="loginError"></div>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" required />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="btn-primary" id="loginBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+        Log In
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const API_BASE = window.location.origin; // same server, since admin panel is served by the backend itself
+
+  const loginForm = document.getElementById('loginForm');
+  const loginError = document.getElementById('loginError');
+  const loginBtn = document.getElementById('loginBtn');
+
+  // If already logged in, skip straight to dashboard
+  fetch(API_BASE + '/api/admin/session', { credentials: 'include' })
+    .then(res => res.json())
+    .then(data => {
+      if (data.loggedIn) window.location.href = 'dashboard.html';
+    })
+    .catch(() => {});
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    loginError.classList.remove('show');
+    loginBtn.disabled = true;
+    loginBtn.textContent = 'Logging in...';
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    try {
+      const res = await fetch(API_BASE + '/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        loginError.textContent = data.error || 'Login failed. Please try again.';
+        loginError.classList.add('show');
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = 'Log In';
+        return;
+      }
+
+      window.location.href = 'dashboard.html';
+    } catch (err) {
+      loginError.textContent = 'Could not reach the server. Is the backend running?';
+      loginError.classList.add('show');
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = 'Log In';
+    }
+  });
+</script>
+
+</body>
+</html>

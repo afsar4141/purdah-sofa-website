@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join as a Worker | Purdah-Sofa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="join.css">
+</head>
+<body>
+
+<div class="join-page">
+
+  <div class="join-topbar">
+    <a href="index.html" class="join-logo">
+      <div class="join-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7a1f2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/>
+        </svg>
+      </div>
+      <span>Purdah-Sofa</span>
+    </a>
+
+    <div class="lang-toggle" role="group" aria-label="Language toggle">
+      <button type="button" class="lang-btn active" data-lang="en">English</button>
+      <button type="button" class="lang-btn" data-lang="hi">हिन्दी</button>
+    </div>
+  </div>
+
+  <div class="join-card">
+    <div class="join-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#7a1f2b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+
+    <h1 data-en="Join Our Team" data-hi="हमारी टीम से जुड़ें">Join Our Team</h1>
+    <p class="join-sub" data-en="Fill this short form. We will call you soon." data-hi="यह छोटा फॉर्म भरें। हम आपको जल्द ही कॉल करेंगे।">
+      Fill this short form. We will call you soon.
+    </p>
+
+    <div class="join-success" id="joinSuccess">
+      <div class="join-success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h2 data-en="Thank You!" data-hi="धन्यवाद!">Thank You!</h2>
+      <p data-en="Your details have been received. Our team will call you soon." data-hi="आपकी जानकारी मिल गई है। हमारी टीम आपको जल्द कॉल करेगी।">
+        Your details have been received. Our team will call you soon.
+      </p>
+      <button type="button" class="join-btn-secondary" id="joinAnotherBtn" data-en="Register Another Worker" data-hi="एक और वर्कर जोड़ें">
+        Register Another Worker
+      </button>
+    </div>
+
+    <form class="join-form" id="joinForm" novalidate>
+
+      <div class="join-field">
+        <label for="wName" data-en="Your Full Name" data-hi="आपका पूरा नाम">Your Full Name</label>
+        <input type="text" id="wName" name="name" data-en-placeholder="e.g. Ramesh Kumar" data-hi-placeholder="जैसे: रमेश कुमार" placeholder="e.g. Ramesh Kumar" required />
+        <span class="join-error" data-error-for="wName"></span>
+      </div>
+
+      <div class="join-field">
+        <label for="wPhone" data-en="Your Phone Number" data-hi="आपका फ़ोन नंबर">Your Phone Number</label>
+        <input type="tel" id="wPhone" name="phone" inputmode="numeric" data-en-placeholder="e.g. 9140727216" data-hi-placeholder="जैसे: 9140727216" placeholder="e.g. 9140727216" required />
+        <span class="join-error" data-error-for="wPhone"></span>
+      </div>
+
+      <div class="join-field">
+        <label for="wSkill" data-en="What Work Do You Do?" data-hi="आप कौन सा काम करते हैं?">What Work Do You Do?</label>
+        <select id="wSkill" name="skill" required>
+          <option value="" disabled selected data-en="Select your work" data-hi="अपना काम चुनें">Select your work</option>
+          <option value="Purdah & Curtains" data-en="Purdah &amp; Curtains" data-hi="पर्दा और कर्टेन">Purdah &amp; Curtains</option>
+          <option value="Sofa Work" data-en="Sofa Work" data-hi="सोफ़ा का काम">Sofa Work</option>
+          <option value="Carpentry" data-en="Carpentry" data-hi="बढ़ईगीरी (कारपेंटर)">Carpentry</option>
+          <option value="Home Furnishing" data-en="Home Furnishing" data-hi="होम फर्निशिंग">Home Furnishing</option>
+          <option value="Other" data-en="Other" data-hi="अन्य">Other</option>
+        </select>
+        <span class="join-error" data-error-for="wSkill"></span>
+      </div>
+
+      <div class="join-field">
+        <label for="wExperience" data-en="Years of Experience (optional)" data-hi="कितने साल का अनुभव (वैकल्पिक)">Years of Experience (optional)</label>
+        <select id="wExperience" name="experience">
+          <option value="" data-en="Select experience" data-hi="अनुभव चुनें">Select experience</option>
+          <option value="Fresher / Less than 1 year" data-en="Fresher / Less than 1 year" data-hi="नया / 1 साल से कम">Fresher / Less than 1 year</option>
+          <option value="1-3 years" data-en="1-3 years" data-hi="1-3 साल">1-3 years</option>
+          <option value="3-5 years" data-en="3-5 years" data-hi="3-5 साल">3-5 years</option>
+          <option value="5+ years" data-en="5+ years" data-hi="5+ साल">5+ years</option>
+        </select>
+      </div>
+
+      <div class="join-field">
+        <label for="wArea" data-en="Your City / Area" data-hi="आपका शहर / इलाका">Your City / Area</label>
+        <input type="text" id="wArea" name="area" data-en-placeholder="e.g. Gorakhpur" data-hi-placeholder="जैसे: गोरखपुर" placeholder="e.g. Gorakhpur" required />
+        <span class="join-error" data-error-for="wArea"></span>
+      </div>
+
+      <button type="submit" class="join-btn-primary" id="joinSubmitBtn" data-en="Submit" data-hi="जमा करें">
+        Submit
+      </button>
+
+      <p class="join-note" data-en="By submitting, our team may call or WhatsApp you regarding work." data-hi="जमा करने पर, हमारी टीम काम के बारे में आपको कॉल या व्हाट्सएप कर सकती है।">
+        By submitting, our team may call or WhatsApp you regarding work.
+      </p>
+    </form>
+  </div>
+
+</div>
+
+<script src="join.js"></script>
+</body>
+</html>
